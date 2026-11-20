@@ -1,0 +1,28 @@
+// Generated from the published Haiven contract schemas. Do not edit by hand.
+//
+// The nullability of a presence discriminant is deliberate and is NOT derived
+// from `required`.
+
+#nullable enable
+
+namespace Haiven.Sdk.Contracts
+{
+	public sealed class WsChatDmEventV0Friend
+	{
+		/// <summary>The other member's user identifier.</summary>
+		public string Id { get; set; } = null!;
+
+		/// <summary>When the other member left the direct message, or null while they are still in it.</summary>
+		public string? LeftAt { get; set; }
+	}
+
+	/// <summary>The payload of a direct-message membership event.</summary>
+	public sealed class WsChatDmEventV0
+	{
+		/// <summary>The direct-message channel this event is about.</summary>
+		public string ChannelId { get; set; } = null!;
+
+		/// <summary>The other member of the direct message.</summary>
+		public WsChatDmEventV0Friend? Friend { get; set; }
+	}
+}

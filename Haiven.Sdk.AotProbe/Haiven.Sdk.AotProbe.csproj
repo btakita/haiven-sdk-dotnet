@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Trim/AOT probe for Haiven.Sdk. Haiven.Sdk itself targets netstandard2.1,
+       where the trim and AOT analyzers do not run, so nothing in its own build
+       says whether it survives a trimmed or NativeAOT game. This net10.0 app
+       references it, roots the whole assembly, and runs ILC — the NativeAOT
+       compiler — over it, which reports IL2026 (RequiresUnreferencedCode) and
+       IL3050 (RequiresDynamicCode) at each call site inside the SDK.
+
+       Driven by scripts/check-aot.py (`make check-aot`), which compares the
+       warnings against aot-baseline.txt. Never shipped. -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsAotCompatible>true</IsAotCompatible>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+    <PublishAot>true</PublishAot>
+    <!-- One warning per call site, not one IL2104 summary per assembly. -->
+    <TrimmerSingleWarn>false</TrimmerSingleWarn>
+    <!-- ILC needs a runtime; analyse for whatever host is running the check.
+         Set here rather than passed as a global property so it does not flow
+         into the netstandard2.1 reference. -->
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Haiven.Sdk/Haiven.Sdk.csproj" />
+    <!-- Analyse every member, not just what Program.cs happens to reach: a game
+         reaches surface this probe never calls. -->
+    <TrimmerRootAssembly Include="Haiven.Sdk" />
+  </ItemGroup>
+
+  <!-- ILC's analysis without the native link that follows it in `dotnet publish`.
+       The link needs a platform C toolchain (clang, Xcode, MSVC) and adds
+       nothing to the analysis, so requiring one would make the check
+       unportable for no gain. The underscore targets are the SDK's own
+       publish pipeline; they are stable for the SDK global.json pins with
+       rollForward: disable, and a pin bump that renames them fails this target
+       loudly rather than passing it. -->
+  <Target Name="AnalyzeAot"
+          DependsOnTargets="Build;_ComputeResolvedCopyLocalPublishAssets;_ComputeAssembliesToCompileToNative;IlcCompile" />
+
+</Project>

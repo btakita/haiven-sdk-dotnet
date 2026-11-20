@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    Runner #2 of the conformance suite: dotnet, executing the same corpus the
+    node runner executes.
+
+    A console runner rather than a test framework, matching how this repository
+    already verifies its emitted C#: one fewer dependency, and the failure output
+    is the assertion rather than a harness's rendering of it.
+
+    net10.0 rather than netstandard2.1 — unlike Haiven.Sdk, this is a tool that
+    runs here and never ships to a game, so pinning it to Unity's surface would
+    constrain it for nothing.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace>Haiven.Sdk.Conformance</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Haiven.Sdk/Haiven.Sdk.csproj" />
+  </ItemGroup>
+
+</Project>

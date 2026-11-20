@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Haiven.Sdk/Haiven.Sdk.csproj" />
+    <ProjectReference Include="../Haiven.Sdk.SystemTextJson/Haiven.Sdk.SystemTextJson.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The Unity package's realtime socket. It has no UnityEngine dependency,
+         only SynchronizationContext, so its main-thread delivery runs here as
+         well as in the engine. -->
+    <Compile Include="../../unity/com.haiven.sdk/Runtime/UnitySocket.cs" Link="Unity/UnitySocket.cs" Condition="!Exists('../codegen/emitted')" />
+    <!-- The promoted haiven-sdk-dotnet repository carries it at the same
+         monorepo-relative path under its root. -->
+    <Compile Include="../sdks/unity/com.haiven.sdk/Runtime/UnitySocket.cs" Link="Unity/UnitySocket.cs" Condition="Exists('../codegen/emitted')" />
+  </ItemGroup>
+
+</Project>

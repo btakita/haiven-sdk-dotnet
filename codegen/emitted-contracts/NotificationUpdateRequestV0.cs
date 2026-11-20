@@ -1,0 +1,25 @@
+// Generated from the published Haiven contract schemas. Do not edit by hand.
+//
+// The nullability of a presence discriminant is deliberate and is NOT derived
+// from `required`.
+
+#nullable enable
+
+namespace Haiven.Sdk.Contracts
+{
+	/// <summary>A request to update a notification's visible fields.</summary>
+	public sealed class NotificationUpdateRequestV0
+	{
+		/// <summary>The stable identifier of this value.</summary>
+		public string Id { get; set; } = null!;
+
+		/// <summary>The notification title shown to the user.</summary>
+		public string Title { get; set; } = null!;
+
+		/// <summary>The notification body shown to the user.</summary>
+		public string Body { get; set; } = null!;
+
+		/// <summary>Opaque application data encoded for JSON transport.</summary>
+		public object? Data { get; set; } = null!;
+	}
+}

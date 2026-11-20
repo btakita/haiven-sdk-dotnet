@@ -1,0 +1,7 @@
+# Known trim/AOT warnings in Haiven.Sdk, reported by `make check-aot`.
+#
+# The built-in generated codec has no reflection or dynamic-code warnings, so
+# this baseline is intentionally empty. The check fails on any new entry and on
+# any stale allowance; do not add a warning here to make the gate pass.
+#
+# Format: <code> <file> <member>   (no line numbers, so unrelated edits do not churn it)

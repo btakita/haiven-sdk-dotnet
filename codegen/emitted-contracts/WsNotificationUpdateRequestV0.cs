@@ -1,0 +1,25 @@
+// Generated from the published Haiven contract schemas. Do not edit by hand.
+//
+// The nullability of a presence discriminant is deliberate and is NOT derived
+// from `required`.
+
+#nullable enable
+
+namespace Haiven.Sdk.Contracts
+{
+	/// <summary>The payload a client sends on a notifications.update frame, revising one notification.</summary>
+	public sealed class WsNotificationUpdateRequestV0
+	{
+		/// <summary>The notification to revise.</summary>
+		public string Id { get; set; } = null!;
+
+		/// <summary>The replacement headline, omitted to leave it unchanged.</summary>
+		public string? Title { get; set; }
+
+		/// <summary>The replacement message text, omitted to leave it unchanged.</summary>
+		public string? Body { get; set; }
+
+		/// <summary>The replacement structured detail as raw JSON, omitted to leave it unchanged.</summary>
+		public object? Data { get; set; }
+	}
+}

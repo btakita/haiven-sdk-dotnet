@@ -1,0 +1,22 @@
+// Generated from the published Haiven contract schemas. Do not edit by hand.
+//
+// The nullability of a presence discriminant is deliberate and is NOT derived
+// from `required`.
+
+#nullable enable
+
+namespace Haiven.Sdk.Contracts
+{
+	/// <summary>A request to rebind a participation to the socket that sends it, within 30 seconds of losing the old one.</summary>
+	public sealed class SessionResumeRequestV0
+	{
+		/// <summary>The participation to resume.</summary>
+		public string ParticipationId { get; set; } = null!;
+
+		/// <summary>The socket the participation was bound to before the drop.</summary>
+		public string PreviousConnectionId { get; set; } = null!;
+
+		/// <summary>The resume token sent with the create or join that admitted the participation.</summary>
+		public string ResumeToken { get; set; } = null!;
+	}
+}

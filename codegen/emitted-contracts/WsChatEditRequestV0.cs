@@ -1,0 +1,19 @@
+// Generated from the published Haiven contract schemas. Do not edit by hand.
+//
+// The nullability of a presence discriminant is deliberate and is NOT derived
+// from `required`.
+
+#nullable enable
+
+namespace Haiven.Sdk.Contracts
+{
+	/// <summary>The payload a client sends on a chat.edit frame, replacing the text of a message it authored.</summary>
+	public sealed class WsChatEditRequestV0
+	{
+		/// <summary>The message to edit.</summary>
+		public string MessageId { get; set; } = null!;
+
+		/// <summary>The replacement message text.</summary>
+		public string Content { get; set; } = null!;
+	}
+}

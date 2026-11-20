@@ -1,0 +1,19 @@
+// Generated from the published Haiven contract schemas. Do not edit by hand.
+//
+// The nullability of a presence discriminant is deliberate and is NOT derived
+// from `required`.
+
+#nullable enable
+
+namespace Haiven.Sdk.Contracts
+{
+	/// <summary>The payload a client sends on a chat.typing frame, reporting its own typing state.</summary>
+	public sealed class WsChatTypingRequestV0
+	{
+		/// <summary>The channel the typing state applies to.</summary>
+		public string ChannelId { get; set; } = null!;
+
+		/// <summary>Whether the user is currently typing.</summary>
+		public bool IsTyping { get; set; }
+	}
+}

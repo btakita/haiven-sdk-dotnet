@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The System.Text.Json codec built against Haiven.Sdk.Core, the assembly the
+       Unity and Godot .NET hosts load, as Haiven.Sdk.Core is Haiven.Sdk built
+       for them. Same sources as Haiven.Sdk.SystemTextJson and the same assembly
+       name, so the Unity asmdef that opts into it names one DLL either way. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AssemblyName>Haiven.Sdk.SystemTextJson</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../Haiven.Sdk.SystemTextJson/*.cs" />
+    <ProjectReference Include="../Haiven.Sdk.Core/Haiven.Sdk.Core.csproj" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+  </ItemGroup>
+</Project>
