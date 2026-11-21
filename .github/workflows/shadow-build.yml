@@ -88,6 +88,9 @@ jobs:
       - name: Install pinned age
         shell: bash
         run: go install filippo.io/age/cmd/age@v1.3.2
+      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
+        with:
+          global-json-file: source/global.json
       - name: Verify and reconstruct approved source
         env:
           SHADOW_REQUEST: ${{ inputs.request }}
@@ -98,9 +101,6 @@ jobs:
           export PATH="$go_bin:$PATH"
           python builder/.github/shadow-build/build.py reconstruct --source source \
             --dotnet source --verification "$RUNNER_TEMP/shadow-source.json"
-      - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
-        with:
-          global-json-file: source/global.json
       - id: build
         name: Build and seal results
         env:
