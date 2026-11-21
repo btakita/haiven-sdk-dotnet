@@ -3,6 +3,26 @@
 Normative client behaviour (session lifecycle, recovery, open vocabularies, REST, handoff) is specified in
 the Haiven SDK client specification.
 
+## Install
+
+Download `haiven-dotnet-portable.tar.gz` from the
+[.NET SDK release](https://github.com/haiven-dev/haiven-sdk-dotnet/releases/tag/v0.1.0-preview.1).
+Extract it into your project folder. The release provides
+`SHA256SUMS.binaries` for the archive. From your project folder, install
+the core package from the extracted NuGet feed.
+
+```sh
+dotnet add package Haiven.Sdk --version 0.1.0-preview.1 --source ./haiven-dotnet-portable
+```
+
+To build against source, clone the public release tag into your project
+folder and add a project reference.
+
+```sh
+git clone --depth 1 --branch v0.1.0-preview.1 https://github.com/haiven-dev/haiven-sdk-dotnet.git
+dotnet add reference ./haiven-sdk-dotnet/Haiven.Sdk/Haiven.Sdk.csproj
+```
+
 ## The question
 
 **Does the outbound envelope's discriminant survive the crossing into C#, and
